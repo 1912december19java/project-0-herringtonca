@@ -18,7 +18,7 @@ public class BankingDAOPostgres implements BankingDAO {
   private static User user = new User();
   private static Logger Log = Logger.getLogger(BankingDAOPostgres.class);
 
-  static {
+  static {//connects to database
     try {
       conn = DriverManager.getConnection(System.getenv("connstring"), System.getenv("username"),
           System.getenv("password"));
@@ -26,7 +26,7 @@ public class BankingDAOPostgres implements BankingDAO {
       Log.error("Database connection unsucessful.", e);
     }
   }
-
+  
   @Override
   public void deposit(double amount) {
     PreparedStatement stmt = null;

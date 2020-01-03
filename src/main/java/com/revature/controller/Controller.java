@@ -52,7 +52,9 @@ public class Controller {
       }
     }
   }
-
+/**
+ * default screen all users see when they application is started
+ */
   private void homeScreen() {
     System.out.println(
         "Welcome to The Bank! Your one stop shop for all your banking needs wants and desires!");
@@ -166,7 +168,7 @@ public class Controller {
     } else if(userInput == 4){
       serve.getTransactionHistory();
     }else
-      serve.logout();
+      logout();
   }
 
   /**
@@ -306,26 +308,17 @@ public class Controller {
     return -1;
   }
 
+  /**
+   * sends a call to the service layer to retrieve current balance
+   */
   public void getBalance() {
     serve.getBalance();
   }
 
-  private void logout() {
-    System.out.println("Are you sure you would like to logout?\nY or N");
-
-    String userInput = input.nextLine();
-    if (userInput.substring(0, 1).equalsIgnoreCase("n"))
-      this.state = "Transaction Screen";
-    else if (userInput.substring(0, 1).equalsIgnoreCase("y")) {
-      reset();
-    } else {
-      log.error("entered something other than a string that started with \"y\" or \"n\"");
-      System.out.println("Invalid input");
-      reset();
-    }
-  }
-
-  public void reset() {
+  /**
+   * Sets user credentials to null, sends a call up to service layer to do the same
+   */
+  public void logout() {
     serve.logout();
     this.state = "Home Screen";
     user.setUsername(null);
